@@ -9,16 +9,21 @@
 </head>
 <body>
     <button class='btn btn-primary btn-lg' onclick='getFruits()'>FRUIT BASKET</button>
+    <button class='btn btn-primary btn-lg' onclick='addFruits("banana")'>ADD FRUIT</button>
+    <button class='btn btn-primary btn-lg' onclick='biteFruits("banana")'>BITE FRUIT</button>
+    <button class='btn btn-primary btn-lg' onclick='bruiseFruits("peach")'>BRUISE FRUIT</button>
+    <button class='btn btn-primary btn-lg' onclick='eatFruits("mango")'>EAT FRUIT</button>
+
     <div id ="basket">
 
     </div>
-        
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
   <script>
         function getFruits() {
             //1 make request to server  x
-            //2 if successful show on page 
-            //2a find a place to put successful 
+            //2 if successful show on page
+            //2a find a place to put successful
             //2b get the results of getFruits();
             //2c inject on html page
             //3 if error, display error
@@ -27,9 +32,55 @@
                 console.log(results)
             })
             .catch(function(err){
+                document.getElementById('basket').innerHTML= err.message
                 console.error('Error Message', err.message);
             })
-    };
+        };
+
+        function addFruits(fruit) {
+          axios.post('http://localhost:3000/fruits', {fruit}).then(function(results) {
+              document.getElementById('basket').innerHTML= results.data
+              console.log(results)
+          })
+          .catch(function(err){
+              document.getElementById('basket').innerHTML= err.message
+              console.error('Error Message', err.message);
+          })
+        }
+
+        function biteFruits(fruit) {
+          axios.patch(`http://localhost:3000/fruits/${fruit}`, {fruit}).then(function(results) {
+              document.getElementById('basket').innerHTML= results.data
+              console.log(results)
+          })
+          .catch(function(err){
+              document.getElementById('basket').innerHTML= err.message
+              console.error('Error Message', err.message);
+          })
+        }
+
+        function bruiseFruits(fruit) {
+          axios.put(`http://localhost:3000/fruits/${fruit}`, {fruit}).then(function(results) {
+              document.getElementById('basket').innerHTML= results.data
+              console.log(results)
+          })
+          .catch(function(err){
+              document.getElementById('basket').innerHTML= err.message
+              console.error('Error Message', err.message);
+          })
+        }
+
+        function eatFruits(fruit) {
+          axios.delete(`http://localhost:3000/fruits/${fruit}`).then(function(results) {
+              document.getElementById('basket').innerHTML= results.data
+              console.log(results)
+          })
+          .catch(function(err){
+              document.getElementById('basket').innerHTML= err.message
+              console.error('Error Message', err.message);
+          })
+        }
+
     </script>
 </body>
 </html>
