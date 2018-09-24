@@ -9,14 +9,25 @@
 </head>
 <body>
     <button class='btn btn-primary btn-lg' onclick='getFruits()'>FRUIT BASKET</button>
+    <div id ="basket">
+
+    </div>
+        
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
-    <script>
+  <script>
         function getFruits() {
             //1 make request to server  x
-            //2 if successful show on page
+            //2 if successful show on page 
+            //2a find a place to put successful 
+            //2b get the results of getFruits();
+            //2c inject on html page
             //3 if error, display error
             axios.get('http://localhost:3000/fruits').then(function(results) {
+                document.getElementById('basket').innerHTML= results.data
                 console.log(results)
+            })
+            .catch(function(err){
+                console.error('Error Message', err.message);
             })
     };
     </script>
