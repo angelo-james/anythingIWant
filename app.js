@@ -6,6 +6,7 @@ app.get('/fruits', (req, res)=>{
     res.send(`Hello g101!, I am a basket of fruits!`)
 })
 app.get('/fruits/:id', (req, res)=>{
+    console.log("req", req);
     res.send(`I am a fruit called ${req.params.id}`)
 })
 
@@ -19,6 +20,10 @@ app.patch('/fruits/:id', (req, res)=>{
 
 app.put('/fruits/:id', (req, res)=>{
     res.send('PUT: Bruise the fruit from basket of fruits')
+})
+
+app.delete('/fruits/:id', (req, res) => {
+    res.send('DELETE: Ate the fruit')
 })
 
 const listener = console.log(`You're on port ${port}`);
